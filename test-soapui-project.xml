@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project name="test" soapui-version="1.7.1" xmlns:con="http://eviware.com/soapui/config"><con:settings><con:setting id="ProjectSettings@projectRoot">C:\java\cxf\workspace\jmsbridge</con:setting></con:settings><con:interface name="CustomerServiceServiceSoapBinding" bindingName="{http://customerservice.example.com/}CustomerServiceServiceSoapBinding" soapVersion="1_1" definition="file:C:\workspaces\workspace32\cxfwsdlfirstexample\src\main\wsdl\CustomerService.wsdl"><con:settings/><con:endpoints><con:endpoint>http://localhost:8080/jmsbridge/test.cxf.jmstransport.queue</con:endpoint></con:endpoints><con:operation action="" name="getCustomersByName" bindingOperationName="getCustomersByName" inputName="getCustomersByName" outputName="getCustomersByNameResponse" isOneWay="false" receivesAttachments="false" sendsAttachments="false"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/jmsbridge/test.cxf.jmstransport.queue</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cus="http://customerservice.example.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cus:getCustomersByName>
+         <!--Optional:-->
+         <name>?</name>
+      </cus:getCustomersByName>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:username>test</con:username><con:password>test3</con:password></con:credentials></con:call></con:operation><con:definitionCache rootPart="file:C:\workspaces\workspace32\cxfwsdlfirstexample\src\main\wsdl\CustomerService.wsdl"><con:part><con:url>file:C:\workspaces\workspace32\cxfwsdlfirstexample\src\main\wsdl\CustomerService.wsdl</con:url><con:content><wsdl:definitions name="CustomerServiceService" targetNamespace="http://customerservice.example.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://customerservice.example.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:types>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://customerservice.example.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="getCustomersByName" type="tns:getCustomersByName"/>
+    <xs:element name="getCustomersByNameResponse" type="tns:getCustomersByNameResponse"/>
+    <xs:complexType name="getCustomersByName">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="name" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="getCustomersByNameResponse">
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:customer"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="customer">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="name" type="xs:string"/>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="address" nillable="true" type="xs:string"/>
+            <xs:element name="numOrders" type="xs:int"/>
+            <xs:element name="revenue" type="xs:double"/>
+            <xs:element minOccurs="0" name="test" type="xs:decimal"/>
+            <xs:element minOccurs="0" name="birthDate" type="xs:dateTime"/>
+            <xs:element minOccurs="0" name="type" type="tns:customerType"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:simpleType name="customerType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="PRIVATE"/>
+            <xs:enumeration value="BUSINESS"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="NoSuchCustomer" type="tns:NoSuchCustomer"/>
+    <xs:complexType name="NoSuchCustomer">
+        <xs:sequence>
+            <xs:element name="customerId" nillable="true" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="getCustomersByNameResponse">
+    <wsdl:part name="parameters" element="tns:getCustomersByNameResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getCustomersByName">
+    <wsdl:part name="parameters" element="tns:getCustomersByName">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="NoSuchCustomerException">
+    <wsdl:part name="NoSuchCustomerException" element="tns:NoSuchCustomer">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="CustomerService">
+    <wsdl:operation name="getCustomersByName">
+      <wsdl:input name="getCustomersByName" message="tns:getCustomersByName">
+    </wsdl:input>
+      <wsdl:output name="getCustomersByNameResponse" message="tns:getCustomersByNameResponse">
+    </wsdl:output>
+      <wsdl:fault name="NoSuchCustomerException" message="tns:NoSuchCustomerException">
+    </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CustomerServiceServiceSoapBinding" type="tns:CustomerService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getCustomersByName">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getCustomersByName">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getCustomersByNameResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NoSuchCustomerException">
+        <soap:fault name="NoSuchCustomerException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CustomerServiceService">
+    <wsdl:port name="CustomerServicePort" binding="tns:CustomerServiceServiceSoapBinding">
+      <soap:address location="http://localhost:9090/CustomerServicePort"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache></con:interface><con:testSuite name="TestSuite 1"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" name="TestCase 1" searchProperties="true"><con:settings/><con:testStep type="request" name="getCustomersByName - Request 1"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>CustomerServiceServiceSoapBinding</con:interface><con:operation>getCustomersByName</con:operation><con:request name="getCustomersByName - Request 1" wssPasswordType=""><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/jmsbridge/test.cxf.jmstransport.queue</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cus="http://customerservice.example.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cus:getCustomersByName>
+         <!--Optional:-->
+         <name>?</name>
+      </cus:getCustomersByName>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:username>test</con:username><con:password>test3</con:password></con:credentials></con:request></con:config></con:testStep><con:loadTest name="LoadTest 1"><con:settings/><con:threadCount>5</con:threadCount><con:startDelay>0</con:startDelay><con:sampleInterval>250</con:sampleInterval><con:calculateTPSOnTimePassed>false</con:calculateTPSOnTimePassed><con:resetStatisticsOnThreadCountChange>true</con:resetStatisticsOnThreadCountChange><con:testLimit>60</con:testLimit><con:limitType>TIME</con:limitType><con:loadStrategy><con:type>Simple</con:type><con:config><testDelay>1000</testDelay><randomFactor>0.5</randomFactor></con:config></con:loadStrategy><con:assertion type="Step Status" name="Step Status"/></con:loadTest></con:testCase></con:testSuite></con:soapui-project>

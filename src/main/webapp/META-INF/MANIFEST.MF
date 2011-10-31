@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Class-Path: activeio-core-3.1.2.jar activemq-core-5.3.0.jar activemq-p
+ rotobuf-1.0.jar aopalliance-1.0.jar commons-codec-1.4.jar commons-log
+ ging-1.1.1.jar commons-logging-api-1.1.jar commons-net-2.0.jar common
+ s-pool-1.3.jar geronimo-j2ee-management_1.0_spec-1.0.jar geronimo-j2e
+ e-management_1.1_spec-1.0.1.jar geronimo-jms_1.1_spec-1.1.1.jar kahad
+ b-5.3.0.jar spring-beans-2.5.5.jar spring-context-2.5.6.jar spring-co
+ ntext-support-2.5.5.jar spring-core-2.5.5.jar spring-jms-2.5.5.jar sp
+ ring-tx-2.5.5.jar
+
